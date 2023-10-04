@@ -185,7 +185,7 @@ clinicaltrials_gov_version <- function(
                        "description"
                    )
 
-        if (! is.null(om$secondaryOutcomes)) {
+        if (! is.null(om$secondaryOutcomes) ) {
             secondary_om <- om$secondaryOutcomes %>%
                 tibble::tibble() %>%
                 dplyr::mutate(ordinal = "Secondary")
@@ -204,9 +204,14 @@ clinicaltrials_gov_version <- function(
                            "timeFrame",
                            "description"
                        )
-            
-            outcomes <- primary_om %>%
-                dplyr::bind_rows(secondary_om)
+
+            if (! is.null(om$primaryOutcomes)) {
+              outcomes <- primary_om %>%
+                  dplyr::bind_rows(secondary_om)
+            }
+            else {
+              outcomes <- secondary_om
+            } 
         } else {
             outcomes <- primary_om
         }
