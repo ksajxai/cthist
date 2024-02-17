@@ -33,7 +33,7 @@
 #' \donttest{
 #' version <- clinicaltrials_gov_version("NCT00942747", 1)
 #' }
-#'
+
 clinicaltrials_gov_version <- function(
                                        nctid,
                                        versionno=0
@@ -82,27 +82,22 @@ clinicaltrials_gov_version <- function(
 
         
         ## Read the overall status
-
         ostatus <- NA
         ostatus <- prot$statusModule$overallStatus
 
         ## Read the "why stopped"
-
         whystopped <- NA
         if (! is.null(prot$statusModule$whyStopped)) {
             whystopped <- prot$statusModule$whyStopped
         }
         
         ## Read the enrolment and type
-
         enrol <- NA
         enrol <- prot$designModule$enrollmentInfo$count
-
         enroltype <- NA
         enroltype <- prot$designModule$enrollmentInfo$type
         
         ## Read the study start date
-
         startdate <- NA
         startdate_precision <- NA
 
@@ -111,6 +106,7 @@ clinicaltrials_gov_version <- function(
         if (! is.null(startdate_raw)) {
             if (stringr::str_length(startdate_raw) == 10) {
                 startdate_precision <- "day"
+                startdate <- startdate_raw
             } else {
                 startdate_precision <- "month"
                 startdate <- paste0(startdate_raw, "-01")
@@ -124,7 +120,6 @@ clinicaltrials_gov_version <- function(
         pcdate <- NA
         pcdate_precision <- NA
         pcdate_type <- NA
-
 
         if (! is.null(pcdate_raw$date)) {
             pcdate <- pcdate_raw$date
@@ -174,7 +169,7 @@ clinicaltrials_gov_version <- function(
         add <- cols[! cols %in% names(primary_om)]
 
         if (length(add) != 0) {
-            primary_om[add] <- NA
+            primary_om[add] <- as.character(NA)
         }
         
         primary_om <- primary_om %>%
@@ -194,7 +189,7 @@ clinicaltrials_gov_version <- function(
             add <- cols[! cols %in% names(secondary_om)]
 
             if (length(add) != 0) {
-                secondary_om[add] <- NA
+                secondary_om[add] <- as.character(NA)
             }
 
             secondary_om <- secondary_om %>%

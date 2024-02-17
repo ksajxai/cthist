@@ -1,3 +1,39 @@
+# cthist 2.1.8
+
+* Added proper citation information linking to the PLOS ONE paper
+
+---
+
+# cthist 2.1.7
+
+* Added new function `extract_publications` to extract publications by
+  type from a data frame of downloaded versions into a new data frame.
+
+---
+
+# cthist 2.1.6
+
+* Fixed bug where download will throw an error in cases where a record
+  has secondary outcome measures specified, but not primary outcome
+  measures
+
+---
+
+# cthist 2.1.5
+
+* Added argument `latest` to function `clinicaltrials_gov_download` to
+  allow downloading only the latest version for many clinical trial
+  registry entries
+
+---
+
+# cthist 2.1.4
+
+* Fix bug in which start date would erroneously return NA in some
+  cases
+
+---
+
 # cthist 2.1.3
 
 * Add support for downloading the latest version of a clinical trial
